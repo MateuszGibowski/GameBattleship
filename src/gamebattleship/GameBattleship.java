@@ -12,13 +12,15 @@ public class GameBattleship {
     {
         Player player = new Player();
         Player ai = new Player();
-       // player.startPlayerBoard(); 
-        boardAi = ai.startAiBoard();
-        ai.boardAi.drawBoard();
-        
-        shootPlayer = player.Playerbattle(boardAi, shootPlayer);
-     
-        shootPlayer.drawBoard();
+       //boardPlayer = player.startPlayerBoard(); 
+       // boardAi = ai.startAiBoard();
+       
+
+   //     shootPlayer = player.playerBattle(boardAi, shootPlayer);
+
+        boardPlayer = ai.startAiBoard();
+         ai.boardAi.drawBoard();
+        shootPlayer = ai.aiBattle(boardPlayer, shootPlayer);
         
         
         

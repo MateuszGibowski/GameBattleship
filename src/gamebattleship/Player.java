@@ -12,6 +12,7 @@ public class Player {
     Board boardAi = new Board();
     Move moveAi = new Move(boardAi);
     Ship shipAi = new Ship();
+    Battle battleAi = new Battle();
     Board shoott;
   
    
@@ -30,11 +31,18 @@ public class Player {
 
 
 
-    Board Playerbattle(Board boardAi, Board shoot)
+    Board playerBattle(Board boardAi, Board shoot)
     {
        shoot = battlePlayer.shoot(boardAi, movePlayer, "player", shoot);
       
       return shoot;
     }
+    
+    Board aiBattle(Board boardAi, Board shoot)
+    {
+       shoot = battleAi.shoot(boardAi, movePlayer, "ai", shoot);
+      
+      return shoot;
+    }    
 
 }
