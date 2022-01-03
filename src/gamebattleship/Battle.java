@@ -35,21 +35,76 @@ public class Battle
 
     private Board aiShoot(Board boardEnemy, Move move, Board aiShoot)
     {
+        playerShoot = whereShootAi(boardEnemy, aiShoot);
         return aiShoot;
     }
 
     private Board playerShoot(Board boardEnemy, Move move, Board playerShoot)
     {
         playerShoot.drawBoard();
-        playerShoot = whereShot(boardEnemy, playerShoot);
+        playerShoot = whereShotPlayer(boardEnemy, playerShoot);
         
         return playerShoot;
+    }
+    
+    private Board whereShootAi(Board boardEnemy, Board aiShoot)
+    {
+        Random rand = new Random();
+        int x;
+        int y;
+        int previous;
+        String yx;
+        
+        previous = 0;
+        for(y = 0 ; y <= 9 ; y++)
+        {
+            for(x = 0 ; x <= 9 ; x++)
+            {
+                if(aiShoot.getBoard(y, x) == 2)
+                {
+                    previous = 1;
+                    break;
+                }
+            }
+            if(previous == 1);
+                break;
+        }
+        
+        if(previous == 1)
+        {
+            yx = checkBestShot(y, x, aiShoot);
+            y = Character.getNumericValue(yx.charAt(0));
+            x = Character.getNumericValue(yx.charAt(0));
+        }
+        
+        if(previous == 0)
+        {
+            while(true)
+            {
+                y = rand.nextInt(10);
+                x = rand.nextInt(10);
+                if(aiShoot.getBoard(y, x) == 0)
+                    break;
+            }
+        }
+    
+        if(boardEnemy.getBoard(y, x) == 5)
+        {
+            aiShoot.setBoard(y, x, 2);
+            boardEnemy.setBoard(y, x, 2);
+            checkDestroy(y, x, boardEnemy, aiShoot);
+        }
+        else
+           aiShoot.setBoard(y, x, 1);
+        
+        
+        return aiShoot;
     }
     
     
     
     
-    private Board whereShot(Board boardEnemy, Board playerShoot)
+    private Board whereShotPlayer(Board boardEnemy, Board playerShoot)
     {
         while(true)
         {
@@ -99,7 +154,10 @@ public class Battle
         System.out.println("EAST: " + east);
         
         if(north == 0 && south == 0 && west == 0 && east == 0)
+        {
             setDestroy(y, x, boardEnemy, playerShoot);
+            System.out.println("Zatopiony!");
+        }
     }
     
     private int checkDestroyNorth(int y,int x, Board boardEnemy, Board playerShoot)
@@ -205,7 +263,13 @@ public class Battle
                 playerShoot.setBoard(y, i, 7);
             }                           
         }   
-    }            
+    }   
     
+    private string checkBestShot(int y, int x, Board aiShoot);
+    {
+        
+        
+        return String.valueOf(y)+String.valueOf(x)
+    }
     
 }
